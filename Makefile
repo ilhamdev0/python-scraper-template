@@ -3,7 +3,7 @@ all: help
 install:
 	@echo "Mulai..."
 	@python -m venv env
-	@source env/bin/activate && pip install -r requirements.txt.txt
+	@source env/bin/activate && pip install -r requirements.txt
 	@echo "Selesai"
 
 help:

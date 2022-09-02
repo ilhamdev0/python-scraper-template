@@ -1,8 +1,4 @@
-from scrap import *
+import strategy
 
-if __name__ == '__main__':
-    p = Scrap()
-    p.crawl()
-    p.extract()
-    p.format()
-    p.save()
+scrap = strategy.normal()
+# scrap = strategy.incremental(1, 2)

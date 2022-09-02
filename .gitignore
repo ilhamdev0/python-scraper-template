@@ -1,2 +1,3 @@
-env
-__pycache__
+env/
+root/
+__pycache__/

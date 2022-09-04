@@ -30,8 +30,10 @@ async def controller(urls: list, parallel_request: int, delay: int, handler) -> 
     delay: introduce delay between request, value equal 0 means no delay
     """
 
-    conn = aiohttp.TCPConnector(limit=None, ttl_dns_cache=300)
-    session = aiohttp.ClientSession(connector=conn)
+    conn = aiohttp.TCPConnector(limit=0, ttl_dns_cache=300)
+    timeout = aiohttp.ClientTimeout(total=3600, connect=300)
+
+    session = aiohttp.ClientSession(connector=conn,timeout=timeout)
 
     results = await gather_with_concurrency(
         parallel_request,

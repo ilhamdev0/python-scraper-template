@@ -1,4 +1,5 @@
 import strategy
 
-scrap = strategy.normal()
-# scrap = strategy.incremental(1, 2)
+# strategy.normal()
+
+#strategy.incremental(1, 10, 0)

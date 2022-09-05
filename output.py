@@ -5,15 +5,13 @@ def dataframe(data: list):
     return pd.DataFrame.from_records(data)
 
 
-def save_csv(data, filename: str):
-    data.to_csv(f"{filename}.csv", index=False)
+def save_parquet(dataframe, filename: str):
+    dataframe.to_parquet(f"{filename}.parquet", index=False)
 
 
-def save_csv_incremental(filename: str, num: int, data):
-    filename = f"{filename}{num}.csv"
-
-    if num > 1:
-        data.to_csv(filename, index=False, header=False)
-        return
-
-    data.to_csv(filename, index=False)
+def save_parquet_incremental(filename: str, num: int, divider: int, dataframe):
+    leading_zero = len(str(divider))
+    num = str(num).zfill(leading_zero)
+    
+    filename = f"{filename}{num}"
+    save_parquet(dataframe, filename)

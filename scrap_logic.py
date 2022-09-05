@@ -16,7 +16,16 @@ def posts(urls: list) -> list:
 
     # custom logic to processing loaded data
     def handler(obj, currenturl):
-        return obj
+        try:
+            data = obj
+
+            if data:
+                return data
+            else:
+                return []
+        except Exception as e:
+            print(f"Error at: {currenturl} :: {e}")
+            raise RuntimeError("STOP")
 
     data = asyncio.run(controller(urls, request, delay, handler))
 

@@ -1,6 +1,6 @@
 from scrap_logic import posts as scrapPosts
 from url import posts as urlPosts
-from output import dataframe, save_csv, save_csv_incremental
+from output import dataframe, save_parquet, save_parquet_incremental
 import numpy as np
 from time import sleep
 
@@ -15,7 +15,7 @@ def normal():
 
     # saving results
     posts_data = dataframe(posts_data)
-    save_csv(posts_data, "posts")
+    save_parquet(posts_data, "posts")
 
 
 def incremental(loop: int, divider: int, delay: int):
@@ -44,7 +44,7 @@ def incremental(loop: int, divider: int, delay: int):
     posts_urls = urlPosts()
 
     # break list of url into smaller chunk by divider
-    chunk_urls = np.array_split(posts_urls, divider)
+    chunks_urls = np.array_split(posts_urls, divider)
 
     for i in range(loop, divider + 1):
         print(f"loop: {i}")
@@ -53,9 +53,10 @@ def incremental(loop: int, divider: int, delay: int):
 
         # saving current results
         posts_data = dataframe(posts_data)
-        save_csv_incremental(
+        save_parquet_incremental(
             "posts",
             i,
+            divider,
             posts_data,
         )
 
